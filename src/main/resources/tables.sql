@@ -1,0 +1,8 @@
+CREATE USER IF NOT EXISTS maxroach;
+CREATE DATABASE bank;
+GRANT ALL ON DATABASE bank TO maxroach;
+
+CREATE TABLE IF NOT EXISTS bank.accounts (
+    id INT PRIMARY KEY,
+    balance DECIMAL
+);

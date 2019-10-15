@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'hu.upscale'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.12
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.typesafe.akka', name: 'akka-http_2.12',   version: '10.1.10'
+    compile group: 'com.typesafe.akka', name: 'akka-stream_2.12', version: '2.5.25'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
