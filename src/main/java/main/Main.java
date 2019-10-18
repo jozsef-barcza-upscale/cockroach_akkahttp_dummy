@@ -8,13 +8,9 @@ import akka.http.javadsl.server.AllDirectives;
 import akka.http.javadsl.server.Route;
 import akka.http.javadsl.unmarshalling.StringUnmarshallers;
 import akka.stream.ActorMaterializer;
-import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Main extends AllDirectives {
 
@@ -23,15 +19,8 @@ public class Main extends AllDirectives {
 
 
     private Connection createConnection() throws SQLException {
-        PGSimpleDataSource ds = new PGSimpleDataSource();
-        ds.setServerName("localhost");
-        ds.setPortNumber(26257);
-        ds.setDatabaseName("bank");
-        ds.setUser("maxroach");
-        ds.setPassword(null);
-        ds.setReWriteBatchedInserts(true); // add `rewriteBatchedInserts=true` to pg connection string
-        ds.setApplicationName("BasicExample");
-        return ds.getConnection();
+        return DriverManager.getConnection("jdbc:mysql://localhost/bank?" +
+                "user=testuser&password=password");
     }
 
     public static void main(String[] args) throws IOException, SQLException {
@@ -52,10 +41,9 @@ public class Main extends AllDirectives {
 
 
         System.out.println("Server is running on :8090");
-        System.in.read();
-
-        binding.thenCompose(ServerBinding::unbind)
-                .thenAccept(unbound -> actorSystem.terminate());
+        while(1 < 2) {}
+//       binding.thenCompose(ServerBinding::unbind)
+//                .thenAccept(unbound -> actorSystem.terminate());
 
 
     }
